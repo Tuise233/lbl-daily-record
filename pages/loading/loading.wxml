@@ -15,6 +15,6 @@
   <view class="usermotto">
     <van-loading type="spinner" color="#1989fa">加载中...</van-loading>
     <text style="font-size: 20rpx; color: gray; margin-top: 400rpx;">数据版本: {{dataVersion}}</text>
-    <text style="font-size: 20rpx; color: gray; margin-top: 10rpx;">Copyright © 拉布拉马</text>
+    <text style="font-size: 20rpx; color: gray; margin-top: 10rpx;">Copyright © 拉布拉马.</text>
   </view>
 </view>
