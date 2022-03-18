@@ -1,4 +1,5 @@
 import Notify from "../../miniprogram_npm/@vant/weapp/notify/notify";
+import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
 import { formatTime, overDate, saveData, sendTips } from "../../utils/util"
 
 // pages/eating/eating.js
@@ -59,13 +60,11 @@ Page({
       console.log(data);
       //判断数据
       if(this.data.mainFood == "" || this.data.secondFood == "" || this.data.thirdFood == ""){
-        Notify({
-          type: "warning",
-          message: "笨蛋 没有请填无!",
-          top: 0,
-          safeAreaInsetTop: true
-        })
-        return;
+        this.setData({
+          mainFood: "无",
+          secondFood: "无",
+          thirdFood: "无"
+        });
       }
 
       //判断是否有当日数据
@@ -119,6 +118,11 @@ Page({
       if(recorded == false && index != -1){
         var that = this;
         //上传图片
+        Toast.loading({
+          message: "上传图片中...",
+          forbidClick: true,
+          loadingType: 'spinner'
+        });
         let now = String(formatTime(new Date()));
         if(this.data.foodSrc != ""){
           wx.cloud.uploadFile({
@@ -139,6 +143,7 @@ Page({
               wx.cloud.getTempFileURL({
                 fileList: [res.fileID],
                 success(response){
+                  Toast.clear();
                   sendTips("女朋友打卡提醒", `火车侠打卡啦  \n事件: ${that.data.typeList[that.data.type]}打卡  \n当前积分: ${current.globalData.userData["score"]}  \n餐食类型: ${that.data.typeList[that.data.type]}  \n主食: ${that.data.mainFood}  \n配食: ${that.data.secondFood}  \n配汤: ${that.data.thirdFood}  \n![打卡图片](${response.fileList[0]["tempFileURL"]})`);
 
                 Notify({

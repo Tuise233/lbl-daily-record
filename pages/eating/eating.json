@@ -10,6 +10,7 @@
     "van-field": "../../miniprogram_npm/@vant/weapp/field/index",
     "van-rate": "../../miniprogram_npm/@vant/weapp/rate/index",
     "van-uploader": "../../miniprogram_npm/@vant/weapp/uploader/index",
-    "van-image": "../../miniprogram_npm/@vant/weapp/image/index"
+    "van-image": "../../miniprogram_npm/@vant/weapp/image/index",
+    "van-toast": "../../miniprogram_npm/@vant/weapp/toast/index"
   }
 }
