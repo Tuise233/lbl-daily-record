@@ -1,0 +1,27 @@
+<view class="container">
+    <!-- <text style="font-size: 50rpx; font-weight: 900; margin-top: 250rpx;">{{typeList[type]}}打卡</text>
+    <text style="font-size: 30rpx; font-weight: 900; color: gray; margin-top: 50rpx;">今天火车侠有好好吃{{typeList[type]}}咩?</text>
+    <van-button type="primary" size="normal" style="margin-top: 100rpx;" bindtap="recordEatting">打卡吃饭</van-button>
+    <text style="font-size: 25rpx; font-weight: 900; color: gray; margin-top: 50rpx;">上次打卡时间: {{lastTime}} (共打卡{{count}}次)</text>
+    <van-notify id="van-notify" /> -->
+    <view class="titleContainer">
+        <text style="font-weight: 900; font-size: 40rpx;">{{typeList[type]}}打卡</text>
+        <text style="margin-top: 20rpx; color: gray; font-size: 30rpx;">今天的火车侠有好好吃{{typeList[type]}}咩?</text>
+    </view>
+    <view class="mainContainer">
+        <van-cell-group inset>
+            <van-cell title="{{typeList[type]}}状态" label="要给我好好记录!" />
+            <van-field id="mainFood" value="{{mainFood}}" label="主食" type="textarea" placeholder="今天主食吃了森莫?" autosize border="{{false}}" bind:change="onFoodChange" />
+            <van-field id="secondFood" value="{{secondFood}}" label="配食" type="textarea" placeholder="告诉我今天配了森莫!" autosize border="{{false}}" bind:change="onFoodChange" />
+            <van-field id="thirdFood" value="{{thirdFood}}" label="配汤" type="textarea" placeholder="汤 饮料 还是白开水?" autosize border="{{false}}" bind:change="onFoodChange" />
+            <van-cell title="照片上传">
+                <van-image width="160" height="90" src="{{foodSrc}}" bindtap="onPicSelected"/>
+            </van-cell>
+        </van-cell-group>
+
+        <van-cell-group inset>
+            <van-button type="info" size="large" bindtap="recordEatting">{{typeList[type]}}打卡</van-button>
+        </van-cell-group>
+    </view>
+</view>
+<van-notify id="van-notify" />

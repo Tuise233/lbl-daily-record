@@ -1,0 +1,19 @@
+{
+    "pages": [
+        "pages/loading/loading",
+        "pages/eating/eating",
+        
+        "pages/sleep/sleep",
+        "pages/main/main"
+        
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#f3f0f0",
+        "navigationBarTitleText": "Weixin",
+        "navigationBarTextStyle": "black",
+        "navigationStyle": "custom"
+    },
+    "sitemapLocation": "sitemap.json",
+    "lazyCodeLoading": "requiredComponents"
+}

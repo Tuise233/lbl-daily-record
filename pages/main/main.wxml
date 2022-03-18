@@ -1,0 +1,38 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="titleContainer">
+    <text class="mainTitle" style="font-weight: 900; font-size: 40rpx;">铁胆火车侠的成长记录</text>
+    <text class="mainDescription" style="margin-top: 20rpx; color: gray; font-size: 30rpx;">当前积分: {{score}}</text>
+  </view>
+
+  <view class="mainContainer">
+    <van-cell-group inset>
+      <van-cell title="睡眠打卡" label="今天早睡早起了吗?" />
+      <van-cell title="晚睡打卡" is-link bindtap="onSleep" />
+    </van-cell-group>
+    
+    <van-cell-group inset>
+      <van-cell title="三餐打卡" label="按时吃饭身体棒!" />
+      <van-cell title="早餐打卡" bindtap="onEatting" data-type="0" is-link />
+      <van-cell title="午餐打卡" bindtap="onEatting" data-type="1" is-link />
+      <van-cell title="晚餐打卡" bindtap="onEatting" data-type="2" is-link />
+    </van-cell-group>
+
+    <van-cell-group inset>
+      <van-cell title="运动打卡" label="不运动的火车侠不是好火车侠!" />
+      <van-cell title="今天出门啦" is-link />
+      <van-cell title="今天没出门" is-link />
+    </van-cell-group>
+
+    <van-cell-group inset>
+      <van-cell title="历史数据" label="看看记录的成长8~" is-link />
+      <van-cell title="积分商城" label="猜猜能换到什么捏" is-link />
+      <van-cell title="积分抽奖" label="爱笑的火车侠运气不会太差" is-link />
+    </van-cell-group>
+
+    <van-cell-group inset>
+      <van-button type="danger" size="large" bindtap="onInitData">清空数据</van-button>
+    </van-cell-group>
+  </view>
+</view>
+<van-notify id="van-notify" />

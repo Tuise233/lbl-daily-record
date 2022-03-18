@@ -1,0 +1,26 @@
+{
+    "score": 0,
+    "date": "",
+    "sleep": {
+      "count": 0,
+      "state": false,
+      "list": [{
+            "date": "", 
+            "motion": 0, 
+            "rate1": 0, 
+            "rate2": 0
+        }]
+    },
+    "eatting":{
+        "count": 0,
+        "list": [{
+            "type": 0,
+            "date": "",
+            "state": false,
+            "mainFood": "",
+            "secondFood": "",
+            "thirdFood": "",
+            "picName": ""
+        }]
+    }
+}

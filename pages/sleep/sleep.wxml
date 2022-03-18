@@ -1,0 +1,49 @@
+<view class="container">
+    <!-- <text style="font-size: 50rpx; font-weight: 900; margin-top: 250rpx;">晚睡打卡</text>
+    <text style="font-size: 30rpx; font-weight: 900; color: gray; margin-top: 50rpx;">晚安 愿长夜无梦 在所有夜晚安眠</text>
+    <van-button type="primary" size="normal" style="margin-top: 100rpx;" bindtap="recordSleep">打卡睡觉</van-button>
+    <text style="font-size: 25rpx; font-weight: 900; color: gray; margin-top: 50rpx;">上次打卡时间: {{lastTime}} (共打卡{{count}}次)</text>
+    <van-notify id="van-notify" /> -->
+    <view class="titleContainer">
+        <text style="font-weight: 900; font-size: 40rpx;">晚睡打卡</text>
+        <text style="margin-top: 20rpx; color: gray; font-size: 30rpx;">晚安 愿长夜无梦 在所有夜晚安眠</text>
+    </view>
+    <view class="mainContainer">
+        <van-cell-group inset>
+            <van-cell title="今日心情" label="今天一整天的心情如何?" />
+            <van-radio-group value="{{radio}}" bind:change="onChange">
+                    <van-cell-group>
+                        <van-cell title="开心🙂" clickable data-name="0" bind:click="onClick">
+                            <van-radio slot="right-icon" name="0" />
+                        </van-cell>
+                        <van-cell title="一般😐" clickable data-name="1" bind:click="onClick">
+                            <van-radio slot="right-icon" name="1" />
+                        </van-cell>
+                        <van-cell title="不开心☹️" clickable data-name="2" bind:click="onClick">
+                            <van-radio slot="right-icon" name="2" />
+                        </van-cell>
+                    </van-cell-group>
+                </van-radio-group>
+        </van-cell-group>
+
+        <van-cell-group inset>
+            <van-cell title="今日状态" label="给今天的自己打个分吧~" />
+            <van-cell title="执行力">
+                <van-rate id="rateValue1" value="{{rateValue1}}" size="{{25}}" color="#FFD700" void-icon="star" void-color="#eee" bind:change="onRateChange" />
+            </van-cell>
+            <van-cell title="专注力">
+                <van-rate id="rateValue2" value="{{rateValue2}}" size="{{25}}" color="#FFD700" void-icon="star" void-color="#eee" bind:change="onRateChange" />
+            </van-cell>
+        </van-cell-group>
+
+        <van-cell-group inset>
+            <van-cell title="今日留言" label="就没有什么想对拉布拉马说的嘛!" />
+            <van-field value="{{leaveMsg}}" label="留言" type="textarea" placeholder="请输入留言" autosize border="{{false}}" bind:change="onMsgChange" />
+        </van-cell-group>
+
+        <van-cell-group inset>
+            <van-button type="info" size="large" bindtap="recordSleep">打卡睡觉</van-button>
+        </van-cell-group>
+    </view>
+</view>
+<van-notify id="van-notify" />
