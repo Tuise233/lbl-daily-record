@@ -5,7 +5,8 @@
         "pages/eating/eating",
         "pages/sleep/sleep",
         "pages/main/main",
-        "pages/store"
+        "pages/store/store_main/store",
+        "pages/store/store_history/store"
     ],
     "window": {
         "backgroundTextStyle": "light",

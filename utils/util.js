@@ -1,7 +1,7 @@
 
 export const userData = {
-  "version": "1.3",
-  "score": 21,
+  "version": "1.4",
+  "score": 0,
   "name": "hcx",
   "date": formatTime(new Date()),
   "sleep": {
@@ -16,7 +16,8 @@ export const userData = {
   "selfpic": {
     "count": 0,
     "list": []
-  }
+  },
+  "giftlist": []
 }
 
 export function formatTime(date){

@@ -14,8 +14,8 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     canIUseGetUserProfile: false,
     canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
-    dataVersion: 0,
-    appVersion: 0,
+    dataVersion: "正在获取...",
+    lastestVersion: 0,
   },
   // 事件处理函数
   bindViewTap() {
@@ -24,6 +24,9 @@ Page({
     })
   },
   onLoad() {
+    this.setData({
+      lastestVersion: userData["version"]
+    })
     const current = getApp();
     setTimeout(() => {
       //数据库实例化
@@ -31,9 +34,7 @@ Page({
       const collection = database.collection("dailypunch");
       //获取数据
       let data = null;
-      collection.where({
-        name: current.globalData.name
-      }).get().then((res) => {
+      collection.get().then((res) => {
         data = res["data"][0];
         if(data != null){
           //更新日期
@@ -56,6 +57,7 @@ Page({
             newData["date"] = data["date"];
             newData["sleep"] = data["sleep"];
             newData["eatting"] = data["eatting"];
+            newData["selfpic"] = data["selfpic"];
             data = newData;
             updateData(data);
           }
@@ -70,12 +72,12 @@ Page({
           wx.cloud.database().collection("dailypunch").add({
             data: userData
           });
-          Notify({
-            type: "danger",
-            message: "数据拉取失败，快去问问神奇的拉布拉马~",
-            top: 0,
-            safeAreaInsetTop: true
-          })
+          getApp().globalData.userData = data;
+          setTimeout(() => {
+            wx.redirectTo({
+              url: '../main/main',
+            })
+          }, 2000);
         }
       })
     }, 1000);

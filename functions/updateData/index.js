@@ -20,7 +20,8 @@ exports.main = async (event, context) => {
                 date: data["date"],
                 sleep: data["sleep"],
                 eatting: data["eatting"],
-                selfpic: data["selfpic"]
+                selfpic: data["selfpic"],
+                giftlist: data["giftlist"]
             }
         });
     } catch(e){

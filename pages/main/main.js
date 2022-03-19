@@ -30,6 +30,18 @@ Page({
     })
   },
 
+  onGiftStore: function(event){
+    wx.navigateTo({
+      url: '../store/store_main/store',
+    })
+  },
+
+  onGiftUse: function(event){
+    wx.navigateTo({
+      url: '../store/store_history/store',
+    })
+  },
+
   onInitData: function(event){
     initData();
     setTimeout(() => {

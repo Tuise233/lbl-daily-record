@@ -1,0 +1,19 @@
+<!--pages/store/store_histroy/store_histroy.wxml-->
+<view class="container">
+    <view class="titleContainer">
+        <text style="font-weight: 900; font-size: 40rpx;">奖励背包</text>
+        <text style="margin-top: 20rpx; color: gray; font-size: 30rpx;">还未使用的奖励都在这里~</text>
+    </view>
+
+    <view class="mainContainer">
+        <van-cell-group inset>
+            <van-cell title="奖励列表" label="使用奖励前三思!!!" />
+            <van-cell wx:if="{{giftList.length == 0}}" title="这么贪心! 还没奖励就点开看什么!" />
+            <view wx:for="{{giftList}}" wx:for-item="item" wx:for-index="index" wx:key="key">
+                <van-cell title="{{item.gift}}" label="获奖时间:{{item.date}}" bindtap="useGift" data-index="{{index}}" is-link />
+            </view>
+        </van-cell-group>
+    </view>
+</view>
+<van-notify id="van-notify" />
+<van-dialog id="van-dialog" />
