@@ -57,6 +57,8 @@ Page({
 
     recordEatting: function(event){
       let data = getApp().globalData.userData;
+      let recorded = false;
+      let index = -1;
       //判断数据
       if(this.data.mainFood == "" || this.data.secondFood == "" || this.data.thirdFood == ""){
         this.setData({
@@ -71,7 +73,9 @@ Page({
       let exist = false;
       if(array.length > 0){
         for(let i = 0; i < array.length; i++){
-          if(overDate(array[i]["date"], formatTime(new Date()))){
+          let date1 = String(array[i][0]["date"]);
+          let date2 = formatTime(new Date());
+          if(date1.split('/')[0] == date2.split('/')[0] && date1.split('/')[1] == date2.split('/')[1] && date1.split('/')[2].split(' ')[0] == date2.split('/')[2].split(' ')[0]){
             exist = true;
             break;
           }
@@ -79,11 +83,12 @@ Page({
       }
 
       if(exist == false){
+        let newArray = [];
         //不存在当日数据，创建当日数据
         for(let i = 0; i < 3; i++){
-          array.push({
+          newArray.push({
             type: i,
-            date: "",
+            date: formatTime(new Date()),
             state: false,
             mainFood: "",
             secondFood: "",
@@ -91,28 +96,116 @@ Page({
             picName: ""
           });
         }
-      }
+        array.push(newArray);
+      } 
 
       //判断该餐是否记录
-      let recorded = false;
-      let index = -1;
       for(let i = 0; i < array.length; i++){
-        if(array[i]["type"] == this.data.type){
-          if(array[i]["state"] == true){
-            Notify({
-              type: "warning",
-              message: "笨蛋 这餐已经记录过啦",
-              top: 0,
-              safeAreaInsetTop: true
-            });
-            recorded = true;
-            return;
-          } else {
-            index = i;
-          }
+        if(array[i][this.data.type]["state"] == true){
+          Notify({
+            type: "warning",
+            message: "笨蛋 这餐已经记录过啦",
+            top: 0,
+            safeAreaInsetTop: true
+          })
+          recorded = true;
+          return;
+        } else {
+          index = i;
         }
       }
 
+      //记录该餐
+      if(recorded == false && index != -1){
+        var that = this;
+        if(this.data.foodSrc != ""){
+          //上传图片
+          Toast.loading({
+            message: "上传图片中...",
+            forbidClick: true,
+            loadingType: 'spinner'
+          });
+          wx.cloud.uploadFile({
+            cloudPath: `Image/Foods/${getApp().globalData.userData["name"]}_${new Date().valueOf()}.png`,
+            filePath: this.data.foodSrc[0],
+            success(res){
+              wx.cloud.getTempFileURL({
+                fileList: [res.fileID],
+                success(response){
+                  let current = getApp();
+                  array[index][that.data.type]["date"] = formatTime(new Date());
+                  array[index][that.data.type]["state"] = true;
+                  array[index][that.data.type]["mainFood"] = that.data.mainFood;
+                  array[index][that.data.type]["secondFood"] = that.data.secondFood;
+                  array[index][that.data.type]["thirdFood"] = that.data.thirdFood;
+                  array[index][that.data.type]["picName"] = res.fileID;
+                  current.globalData.userData["score"] += 1;
+                  current.globalData.userData["eatting"]["count"] += 1;
+                  current.globalData.userData["eatting"]["list"] = array;
+                  Toast.clear();
+                  sendTips("女朋友打卡提醒", `火车侠打卡啦  \n事件: ${that.data.typeList[that.data.type]}打卡  \n当前积分: ${current.globalData.userData["score"]}  \n餐食类型: ${that.data.typeList[that.data.type]}  \n主食: ${that.data.mainFood}  \n配食: ${that.data.secondFood}  \n配汤: ${that.data.thirdFood}  \n![打卡图片](${response.fileList[0]["tempFileURL"]})`);
+                  Notify({
+                    type: "success",
+                    message: "成功打卡啦! 积分+1",
+                    top: 0,
+                    safeAreaInsetTop: true,
+                    onClose(){
+                      wx.navigateBack({
+                        delta: 0,
+                      })
+                    }
+                  })
+                  updateData(current.globalData.userData);
+                },
+                fail(res){
+                  console.log(res);
+                  Notify({
+                    type: "danger",
+                    message: "上传照片失败 快问问神秘的拉布拉马",
+                    top: 0,
+                    safeAreaInsetTop: true
+                  })
+                }
+              })
+            },
+            fail(res){
+              console.log(res);
+              Notify({
+                type: "danger",
+                message: "上传照片失败 快问问神秘的拉布拉马",
+                top: 0,
+                safeAreaInsetTop: true
+              });
+            }
+          })
+        } else {
+          let current = getApp();
+          array[index][this.data.type]["date"] = formatTime(new Date());
+          array[index][this.data.type]["state"] = true;
+          array[index][this.data.type]["mainFood"] = this.data.mainFood;
+          array[index][this.data.type]["secondFood"] = this.data.secondFood;
+          array[index][this.data.type]["thirdFood"] = this.data.thirdFood;
+          array[index][this.data.type]["picName"] = "";
+          current.globalData.userData["score"] += 1;
+          current.globalData.userData["eatting"]["count"] += 1;
+          current.globalData.userData["eatting"]["list"] = array;
+          sendTips("女朋友打卡提醒", `火车侠打卡啦  \n事件: ${this.data.typeList[this.data.type]}打卡  \n当前积分: ${current.globalData.userData["score"]}  \n餐食类型: ${this.data.typeList[this.data.type]}  \n主食: ${this.data.mainFood}  \n配食: ${this.data.secondFood}  \n配汤: ${this.data.thirdFood}  \n无打卡图片`);
+          Notify({
+            type: "success",
+            message: "成功打卡啦! 积分+1",
+            top: 0,
+            safeAreaInsetTop: true,
+            onClose(){
+              wx.navigateBack({
+                delta: 0,
+              })
+            }
+          })
+          updateData(current.globalData.userData);
+        }
+      }
+
+      /*
       //记录该餐
       if(recorded == false && index != -1){
         var that = this;
@@ -132,15 +225,15 @@ Page({
                 fileList: [res.fileID],
                 success(response){
                   let current = getApp();
-                  array[index]["date"] = now;
-                  array[index]["state"] = true;
-                  array[index]["mainFood"] = that.data.mainFood;
-                  array[index]["secondFood"] = that.data.secondFood;
-                  array[index]["thirdFood"] = that.data.thirdFood;
-                  array[index]["picName"] = res.fileID;
+                  newArray[index]["date"] = now;
+                  newArray[index]["state"] = true;
+                  newArray[index]["mainFood"] = that.data.mainFood;
+                  newArray[index]["secondFood"] = that.data.secondFood;
+                  newArray[index]["thirdFood"] = that.data.thirdFood;
+                  newArray[index]["picName"] = res.fileID;
                   current.globalData.userData["score"] += 1;
                   current.globalData.userData["eatting"]["count"] += 1;
-                  current.globalData.userData["eatting"]["list"] = array;
+                  current.globalData.userData["eatting"]["list"].push(newArray);
                   Toast.clear();
                   sendTips("女朋友打卡提醒", `火车侠打卡啦  \n事件: ${that.data.typeList[that.data.type]}打卡  \n当前积分: ${current.globalData.userData["score"]}  \n餐食类型: ${that.data.typeList[that.data.type]}  \n主食: ${that.data.mainFood}  \n配食: ${that.data.secondFood}  \n配汤: ${that.data.thirdFood}  \n![打卡图片](${response.fileList[0]["tempFileURL"]})`);
 
@@ -180,12 +273,12 @@ Page({
           })
         } else {
           let current = getApp();
-          array[index]["date"] = now;
-          array[index]["state"] = true;
-          array[index]["mainFood"] = this.data.mainFood;
-          array[index]["secondFood"] = this.data.secondFood;
-          array[index]["thirdFood"] = this.data.thirdFood;
-          array[index]["picName"] = "";
+          array[index][this.data.type]["date"] = now;
+          array[index][this.data.type]["state"] = true;
+          array[index][this.data.type]["mainFood"] = this.data.mainFood;
+          array[index][this.data.type]["secondFood"] = this.data.secondFood;
+          array[index][this.data.type]["thirdFood"] = this.data.thirdFood;
+          array[index][this.data.type]["picName"] = "";
           current.globalData.userData["score"] += 1;
           current.globalData.userData["eatting"]["count"] += 1;
           current.globalData.userData["eatting"]["list"] = array;
@@ -204,6 +297,7 @@ Page({
           updateData(current.globalData.userData);
         }
       }
+      */
     },
     
     /**

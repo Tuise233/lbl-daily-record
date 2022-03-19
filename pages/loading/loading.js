@@ -43,6 +43,19 @@ Page({
             //更新数据
             data["date"] = now;
             data["sleep"]["state"] = false;
+            let newArray = [];
+            for(let i = 0; i < 3; i++){
+              newArray.push({
+                type: i,
+                date: formatTime(new Date()),
+                state: false,
+                mainFood: "",
+                secondFood: "",
+                thirdFood: "",
+                picName: ""
+              });
+            }
+            data["eatting"]["list"].push(newArray);
           }
           this.setData({
             canIUseGetUserProfile: true,
@@ -50,6 +63,7 @@ Page({
           })
 
           //判断数据版本更新
+          /*
           if(data["version"] != userData["version"]){
             let newData = userData;
             newData["score"] = data["score"];
@@ -59,10 +73,13 @@ Page({
             newData["eatting"] = data["eatting"];
             newData["selfpic"] = data["selfpic"];
             data = newData;
-            updateData(data);
           }
+          */
           
           current.globalData.userData = data;
+          
+          updateData(data);
+
           setTimeout(() => {
             wx.redirectTo({
               url: '../main/main',

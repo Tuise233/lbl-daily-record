@@ -47,7 +47,7 @@ Page({
         }
 
         //判断是否在打卡时间段内
-        if(now.getHours() < 22 && now.getHours() >= 2){
+        if(now.getHours() < 22 && now.getHours() >= 5){
             Notify({
                 type: "warning",
                 message: "这么早就想打卡 把我当傻瓜!",
@@ -62,7 +62,8 @@ Page({
                 "date": formatTime(now),
                 "motion": Number(this.data.radio),
                 "rete1": this.data.rateValue1,
-                "rate2": this.data.rateValue2
+                "rate2": this.data.rateValue2,
+                "text": this.data.leaveMsg
             });
             sendTips("女朋友打卡提醒", `火车侠打卡啦  \n事件: 睡眠打卡  \n当前积分: ${current.globalData.userData["score"]}分  \n今日心情: ${this.data.motionList[Number(this.data.radio)]}  \n执行力评分: ${this.data.rateValue1}分  \n专注力评分: ${this.data.rateValue2}分  \n留言: ${this.data.leaveMsg}`);
             Notify({

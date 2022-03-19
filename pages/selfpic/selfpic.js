@@ -52,7 +52,7 @@ Page({
             })
             let now = formatTime(new Date());
             wx.cloud.uploadFile({
-                cloudPath: `Image/Self/${new Date().valueOf()}.png`,
+                cloudPath: `Image/Self/${getApp().globalData.userData["name"]}_${new Date().valueOf()}.png`,
                 filePath: that.data.picSrc[0],
                 success(res){
                     wx.cloud.getTempFileURL({
