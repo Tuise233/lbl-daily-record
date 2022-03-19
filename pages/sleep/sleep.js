@@ -1,4 +1,4 @@
-const { formatTime, saveData, sendTips } = require("../../utils/util");
+const { formatTime, updateData, sendTips } = require("../../utils/util");
 import Notify from '../../miniprogram_npm/@vant/weapp/notify/notify'
 
 // pages/sleep.js
@@ -47,7 +47,14 @@ Page({
         }
 
         //判断是否在打卡时间段内
-        if(now.getHours() > 22 && now.getHours() <= 1){
+        if(now.getHours() < 22 && now.getHours() >= 2){
+            Notify({
+                type: "warning",
+                message: "这么早就想打卡 把我当傻瓜!",
+                top: 0,
+                safeAreaInsetTop: true
+            })
+        } else {
             current.globalData.userData["score"] += 1;
             current.globalData.userData["sleep"]["count"] += 1;
             current.globalData.userData["sleep"]["state"] = true;
@@ -57,7 +64,6 @@ Page({
                 "rete1": this.data.rateValue1,
                 "rate2": this.data.rateValue2
             });
-            saveData();
             sendTips("女朋友打卡提醒", `火车侠打卡啦  \n事件: 睡眠打卡  \n当前积分: ${current.globalData.userData["score"]}分  \n今日心情: ${this.data.motionList[Number(this.data.radio)]}  \n执行力评分: ${this.data.rateValue1}分  \n专注力评分: ${this.data.rateValue2}分  \n留言: ${this.data.leaveMsg}`);
             Notify({
                 type: "success",
@@ -69,14 +75,8 @@ Page({
                       delta: 0,
                     })
                 }
-            });
-        } else {
-            Notify({
-                type: "warning",
-                message: "这么早就想打卡 把我当傻瓜!",
-                top: 0,
-                safeAreaInsetTop: true
             })
+            updateData(current.globalData.userData);
         }
     },
 

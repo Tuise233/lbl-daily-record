@@ -1,4 +1,4 @@
-const { formatTime, getData, userData, updateData, overDate, initData } = require("./utils/util");
+const { getData } = require("./utils/util");
 
 // app.js
 App({
@@ -7,12 +7,14 @@ App({
 
     wx.login({
       success: res => {
-        getData();
+        
       }
     })
   },
   globalData: {
     userInfo: null,
-    userData: null
+    userData: null,
+    db: null,
+    name: "test"
   }
 })

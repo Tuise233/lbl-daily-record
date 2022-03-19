@@ -1,6 +1,6 @@
 import Notify from "../../miniprogram_npm/@vant/weapp/notify/notify";
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
-import { formatTime, overDate, saveData, sendTips } from "../../utils/util"
+import { formatTime, overDate, sendTips, updateData } from "../../utils/util"
 
 // pages/eating/eating.js
 Page({
@@ -57,7 +57,6 @@ Page({
 
     recordEatting: function(event){
       let data = getApp().globalData.userData;
-      console.log(data);
       //判断数据
       if(this.data.mainFood == "" || this.data.secondFood == "" || this.data.thirdFood == ""){
         this.setData({
@@ -123,43 +122,49 @@ Page({
           forbidClick: true,
           loadingType: 'spinner'
         });
-        let now = String(formatTime(new Date()));
+        let now = formatTime(new Date());
         if(this.data.foodSrc != ""){
           wx.cloud.uploadFile({
             cloudPath: `Image/Foods/${new Date().valueOf()}.png`,
             filePath: this.data.foodSrc[0],
             success(res){
-              let current = getApp();
-              array[index]["date"] = now;
-              array[index]["state"] = true;
-              array[index]["mainFood"] = that.data.mainFood;
-              array[index]["secondFood"] = that.data.secondFood;
-              array[index]["thirdFood"] = that.data.thirdFood;
-              array[index]["picName"] = res.fileID;
-              current.globalData.userData["score"] += 1;
-              current.globalData.userData["eatting"]["count"] += 1;
-              current.globalData.userData["eatting"]["list"] = array;
-              saveData();
               wx.cloud.getTempFileURL({
                 fileList: [res.fileID],
                 success(response){
+                  let current = getApp();
+                  array[index]["date"] = now;
+                  array[index]["state"] = true;
+                  array[index]["mainFood"] = that.data.mainFood;
+                  array[index]["secondFood"] = that.data.secondFood;
+                  array[index]["thirdFood"] = that.data.thirdFood;
+                  array[index]["picName"] = res.fileID;
+                  current.globalData.userData["score"] += 1;
+                  current.globalData.userData["eatting"]["count"] += 1;
+                  current.globalData.userData["eatting"]["list"] = array;
                   Toast.clear();
                   sendTips("女朋友打卡提醒", `火车侠打卡啦  \n事件: ${that.data.typeList[that.data.type]}打卡  \n当前积分: ${current.globalData.userData["score"]}  \n餐食类型: ${that.data.typeList[that.data.type]}  \n主食: ${that.data.mainFood}  \n配食: ${that.data.secondFood}  \n配汤: ${that.data.thirdFood}  \n![打卡图片](${response.fileList[0]["tempFileURL"]})`);
 
-                Notify({
-                  type: "success",
-                  message: "成功打卡啦! 积分+1",
-                  top: 0,
-                  safeAreaInsetTop: true,
-                  onClose(){
-                    wx.navigateBack({
-                      delta: 0,
-                    })
-                  }
-                })
+                  Notify({
+                    type: "success",
+                    message: "成功打卡啦! 积分+1",
+                    top: 0,
+                    safeAreaInsetTop: true,
+                    onClose(){
+                      wx.navigateBack({
+                        delta: 0,
+                      })
+                    }
+                  })
+                  updateData(current.globalData.userData);
                 },
                 fail(res){
                   console.log(res);
+                  Notify({
+                    type: "danger",
+                    message: "上传照片失败 快问问神秘的拉布拉马",
+                    top: 0,
+                    safeAreaInsetTop: true
+                  })
                 }
               })
             },
@@ -184,7 +189,6 @@ Page({
           current.globalData.userData["score"] += 1;
           current.globalData.userData["eatting"]["count"] += 1;
           current.globalData.userData["eatting"]["list"] = array;
-          saveData();
           sendTips("女朋友打卡提醒", `火车侠打卡啦  \n事件: ${this.data.typeList[this.data.type]}打卡  \n当前积分: ${current.globalData.userData["score"]}  \n餐食类型: ${this.data.typeList[this.data.type]}  \n主食: ${this.data.mainFood}  \n配食: ${this.data.secondFood}  \n配汤: ${this.data.thirdFood}  \n无打卡图片`);
           Notify({
             type: "success",
@@ -197,6 +201,7 @@ Page({
               })
             }
           })
+          updateData(current.globalData.userData);
         }
       }
     },

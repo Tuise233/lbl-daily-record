@@ -24,6 +24,12 @@ Page({
     })
   },
 
+  onPicSelf: function(event){
+    wx.navigateTo({
+      url: '../selfpic/selfpic',
+    })
+  },
+
   onInitData: function(event){
     initData();
     setTimeout(() => {

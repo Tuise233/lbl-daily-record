@@ -1,11 +1,11 @@
 {
     "pages": [
         "pages/loading/loading",
+        "pages/selfpic/selfpic",
         "pages/eating/eating",
-        
         "pages/sleep/sleep",
-        "pages/main/main"
-        
+        "pages/main/main",
+        "pages/store"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -14,6 +14,5 @@
         "navigationBarTextStyle": "black",
         "navigationStyle": "custom"
     },
-    "sitemapLocation": "sitemap.json",
-    "lazyCodeLoading": "requiredComponents"
+    "sitemapLocation": "sitemap.json"
 }

@@ -9,7 +9,7 @@
     </block>
     <block wx:else>
       <image bindtap="bindViewTap" class="userinfo-avatar" src="../assets/logo.jpg" mode="cover"></image>
-      <text class="userinfo-nickname">铁胆火车侠的成长记录</text>
+      <text class="userinfo-nickname">火车侠的成长日记</text>
     </block>
   </view>
   <view class="usermotto">
@@ -18,3 +18,5 @@
     <text style="font-size: 20rpx; color: gray; margin-top: 10rpx;">Copyright © 拉布拉马.</text>
   </view>
 </view>
+<van-notify id="van-notify" />
+

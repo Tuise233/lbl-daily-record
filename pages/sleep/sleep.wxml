@@ -1,9 +1,4 @@
 <view class="container">
-    <!-- <text style="font-size: 50rpx; font-weight: 900; margin-top: 250rpx;">晚睡打卡</text>
-    <text style="font-size: 30rpx; font-weight: 900; color: gray; margin-top: 50rpx;">晚安 愿长夜无梦 在所有夜晚安眠</text>
-    <van-button type="primary" size="normal" style="margin-top: 100rpx;" bindtap="recordSleep">打卡睡觉</van-button>
-    <text style="font-size: 25rpx; font-weight: 900; color: gray; margin-top: 50rpx;">上次打卡时间: {{lastTime}} (共打卡{{count}}次)</text>
-    <van-notify id="van-notify" /> -->
     <view class="titleContainer">
         <text style="font-weight: 900; font-size: 40rpx;">晚睡打卡</text>
         <text style="margin-top: 20rpx; color: gray; font-size: 30rpx;">晚安 愿长夜无梦 在所有夜晚安眠</text>

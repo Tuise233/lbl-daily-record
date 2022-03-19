@@ -1,0 +1,21 @@
+<view class="container">
+    <view class="titleContainer">
+        <text style="font-weight: 900; font-size: 40rpx;">自拍打卡</text>
+        <text style="margin-top: 20rpx; color: gray; font-size: 30rpx;">上传一些美照换取一些积分~</text>
+    </view>
+    <view class="mainContainer">
+        <van-cell-group inset>
+            <van-cell title="自拍记录" label="美美的拍照外带的小心情~" />
+            <van-field id="picDetail" value="{{picDetail}}" label="心情" type="textarea" placeholder="记录此刻的心情叭" autosize boder="{{false}}" bind:change="onDetailChange" />
+            <van-cell title="照片上传">
+                <van-image width="160" height="90" src="{{picSrc}}" bindtap="onPicSelected" />
+            </van-cell>
+        </van-cell-group>
+        
+        <van-cell-group inset>
+            <van-button type="info" size="large" bindtap="recordSelfpic">自拍打卡</van-button>
+        </van-cell-group>
+    </view>
+</view>
+<van-notify id="van-notify" />
+<van-toast id="van-toast" />
