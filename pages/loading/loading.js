@@ -1,7 +1,7 @@
 // loading.js
 
 const { default: Notify } = require("../../miniprogram_npm/@vant/weapp/notify/notify");
-const { userData, overDate, formatTime, updateData } = require("../../utils/util");
+const { userData, overDate, formatTime, updateData, isNextDay } = require("../../utils/util");
 
 // 获取应用实例
 const app = getApp()
@@ -43,10 +43,14 @@ Page({
         if(data != null){
           //更新日期
           let now = formatTime(new Date());
-          if(String(data["date"]).split('/')[1] != now.split('/')[1] || String(data["date"]).split('/')[2].split(' ')[0] != now.split('/')[2].split(' ')[0]){
+
+          if(new Date().getHours() < 22 && new Date().getHours() >= 3){
+            data["sleep"]["state"] = false;
+          }
+
+          if(isNextDay(data["date"], now)){
             //更新数据
             data["date"] = now;
-            data["sleep"]["state"] = false;
             let newArray = [];
             for(let i = 0; i < 3; i++){
               newArray.push({

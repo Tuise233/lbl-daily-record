@@ -24,6 +24,12 @@ Page({
 
     },
 
+    getReport: function(event){
+        wx.navigateTo({
+          url: '../store_report/store',
+        })
+    },
+
     getGift: function(event){
         let index = Number(event["target"]["dataset"]["index"]);
         for(let i = 0; i < this.data.giftList.length; i++){

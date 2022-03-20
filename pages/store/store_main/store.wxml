@@ -15,7 +15,7 @@
         </van-cell-group>
 
         <van-cell-group inset>
-            <van-cell title="反馈通道" label="奖励不够丰厚? 点我建议拉布拉马新增奖励!" is-link />
+            <van-cell title="反馈通道" label="奖励不够丰厚? 点我建议拉布拉马新增奖励!" bindtap="getReport" is-link />
         </van-cell-group>
     </view>
 </view>

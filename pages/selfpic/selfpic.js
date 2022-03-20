@@ -62,7 +62,8 @@ Page({
                             data["selfpic"]["count"] += 1;
                             data["selfpic"]["list"].push({
                                 data: now,
-                                picSrc: res.fileID
+                                picSrc: res.fileID,
+                                detail: that.data.picDetail
                             })
                             Toast.clear();
                             sendTips("女朋友打卡提醒", `火车侠打卡啦  \n事件: 自拍打卡  \n当前积分: ${data["score"]}  \n自拍心情: ${that.data.picDetail}  \n![打卡图片](${response.fileList[0]["tempFileURL"]})`);

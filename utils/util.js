@@ -44,6 +44,15 @@ export function overDate(date1, date2){
   } else return false;
 }
 
+export function isNextDay(date1, date2){
+  let date = String(date1);
+  let now = String(date2);
+  if(date.split('/')[0] != now.split('/')[0] || date.split('/')[1] != now.split('/')[1] || date.split('/')[2].split(' ')[0] != now.split('/')[2].split(' ')[0]){
+    return true;
+  }
+  return false;
+}
+
 export function sendTips(title, text){
   wx.request({
     url: `https://sctapi.ftqq.com/SCT66084TytqLkhaFKp1LcZAl3oXubCsi.send`,
@@ -77,5 +86,6 @@ module.exports = {
   overDate,
   updateData,
   sendTips,
-  userData
+  userData,
+  isNextDay
 }

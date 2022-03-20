@@ -6,7 +6,8 @@
         "pages/sleep/sleep",
         "pages/main/main",
         "pages/store/store_main/store",
-        "pages/store/store_history/store"
+        "pages/store/store_history/store",
+        "pages/store/store_report/store"
     ],
     "window": {
         "backgroundTextStyle": "light",

@@ -47,7 +47,7 @@ Page({
         }
 
         //判断是否在打卡时间段内
-        if(now.getHours() < 22 && now.getHours() >= 5){
+        if(now.getHours() < 22 && now.getHours() >= 3){
             Notify({
                 type: "warning",
                 message: "这么早就想打卡 把我当傻瓜!",
