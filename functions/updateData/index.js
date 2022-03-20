@@ -12,7 +12,7 @@ exports.main = async (event, context) => {
     let data = event["data"];
     try{
         return await collection.where({
-            name: event["name"]
+            name: event["data"]["name"]
         }).update({
             data: {
                 version: data["version"],

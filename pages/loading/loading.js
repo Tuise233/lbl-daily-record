@@ -16,6 +16,7 @@ Page({
     canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
     dataVersion: "正在获取...",
     lastestVersion: 0,
+    log: "null"
   },
   // 事件处理函数
   bindViewTap() {
@@ -34,7 +35,10 @@ Page({
       const collection = database.collection("dailypunch");
       //获取数据
       let data = null;
-      collection.get().then((res) => {
+      collection.where({
+        name: 'hcx'
+      }).get().then((res) => {
+        this.setData(res);
         data = res["data"][0];
         if(data != null){
           //更新日期
@@ -63,7 +67,6 @@ Page({
           })
 
           //判断数据版本更新
-          /*
           if(data["version"] != userData["version"]){
             let newData = userData;
             newData["score"] = data["score"];
@@ -74,7 +77,6 @@ Page({
             newData["selfpic"] = data["selfpic"];
             data = newData;
           }
-          */
           
           current.globalData.userData = data;
           

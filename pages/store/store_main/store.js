@@ -13,13 +13,13 @@ Page({
         overlay: false,
         giftList: [
             { name: "马上见面卡", score: 0 },
-            { name: "5.21￥红包", score: 5 },
-            { name: "撤销赌注", scoroe: 10 },
-            { name: "零食大礼包", score: 15 },
-            { name: "心仪口红", score: 20 },
-            { name: "任选小礼物", score: 30 },
-            { name: "万能卡", score: 50 },
-            { name: "任选大餐卡", score: 60 }
+            { name: "5.21￥红包", score: 20 },
+            { name: "撤销赌注", score: 35 },
+            { name: "零食大礼包", score: 40 },
+            { name: "心仪口红", score: 45 },
+            { name: "任选小礼物", score: 55 },
+            { name: "万能卡", score: 75 },
+            { name: "任选大餐卡", score: 85 }
         ],
 
     },
