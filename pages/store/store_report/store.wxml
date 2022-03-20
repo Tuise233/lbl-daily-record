@@ -1,0 +1,21 @@
+<!--pages/store/store.wxml-->
+<view class="container">
+    <view class="titleContainer">
+        <text style="font-weight: 900; font-size: 40rpx;">反馈通道</text>
+        <text style="margin-top: 20rpx; color: gray; font-size: 30rpx;">有什么好的建议嘛?</text>
+    </view>
+
+    <view class="mainContainer">
+        <van-cell-group inset>
+            <van-cell title="新的奖励" label="告诉我你的想法吧~" />
+            <van-field value="{{reportMsg}}" label="反馈" type="textarea" placeholder="请输入内容" autosize border="{{false}}" bind:change="onMsgChange" />
+            
+        </van-cell-group>
+
+        <van-cell-group inset>
+            <van-button type="info" size="large" bindtap="storeReport">反馈</van-button>
+        </van-cell-group>
+    </view>
+</view>
+<van-notify id="van-notify" />
+<van-dialog id="van-dialog" />
