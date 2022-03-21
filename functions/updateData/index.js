@@ -10,9 +10,10 @@ exports.main = async (event, context) => {
     let success = "success";
     let reason = "";
     let data = event["data"];
+    console.log(data);
     try{
         return await collection.where({
-            name: event["data"]["name"]
+            _openid: data["_openid"]
         }).update({
             data: {
                 version: data["version"],
@@ -25,6 +26,7 @@ exports.main = async (event, context) => {
             }
         });
     } catch(e){
+        console.log(e);
         result = "fail";
         reason = e;
     }

@@ -29,6 +29,24 @@ Page({
       lastestVersion: userData["version"]
     })
     const current = getApp();
+    wx.login({
+      success(res){
+        wx.getUserInfo({
+          success(response){
+            wx.cloud.callFunction({
+              name: "getOpenID",
+              data: {
+                code: res.code,
+                iv: response.iv,
+                encryptedData: response.encryptedData
+              }
+            }).then((callRes) => {
+              current.globalData["openId"] = callRes["result"]["openid"];
+            })
+          }
+        })
+      }
+    })
     setTimeout(() => {
       //数据库实例化
       const database = wx.cloud.database();
@@ -85,7 +103,6 @@ Page({
           current.globalData.userData = data;
           
           updateData(data);
-
           setTimeout(() => {
             wx.redirectTo({
               url: '../main/main',

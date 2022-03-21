@@ -4,17 +4,12 @@ const { getData } = require("./utils/util");
 App({
   onLaunch() {
     wx.cloud.init();
-
-    wx.login({
-      success: res => {
-        
-      }
-    })
   },
   globalData: {
     userInfo: null,
     userData: null,
     db: null,
-    name: "test"
+    name: "test",
+    openId: null
   }
 })

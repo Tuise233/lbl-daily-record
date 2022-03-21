@@ -73,6 +73,7 @@ export function updateData(data){
     name: 'updateData',
     data: {
       name: getApp().globalData.name,
+      openId: getApp().globalData.openId,
       data: data
     },
     complete(res){
