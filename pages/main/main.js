@@ -17,6 +17,12 @@ Page({
     })
   },
 
+  onSwap: function(event){
+    wx.navigateTo({
+      url: '../swap/swap',
+    })
+  },
+
   onWake: function(event){
     wx.navigateTo({
       url: '../wake/wake',

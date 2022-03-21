@@ -104,7 +104,7 @@ Page({
           }
           
           current.globalData.userData = data;
-          console.log(data);
+
           updateData(data);
           setTimeout(() => {
             wx.redirectTo({

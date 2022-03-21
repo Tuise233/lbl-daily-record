@@ -35,6 +35,7 @@
       <van-cell title="积分抽奖🗂️" label="爱笑的火车侠运气不会太差" is-link />
       <van-cell title="奖励背包🎒" label="还未使用的奖励都在这里~" bindtap="onGiftUse" is-link />
       <van-cell title="历史数据📊" label="看看记录的成长8~" is-link />
+      <van-cell title="人脸转换😐" label="一些奇怪的小功能" bindtap="onSwap" is-link/>
     </van-cell-group>
 
     <!-- <van-cell-group inset>
