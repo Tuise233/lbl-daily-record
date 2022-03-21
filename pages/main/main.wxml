@@ -9,6 +9,7 @@
     <van-cell-group inset>
       <van-cell title="睡眠打卡🛏️" label="今天早睡早起了吗?" />
       <van-cell title="晚睡打卡🌙" is-link bindtap="onSleep" />
+      <van-cell title="早起打卡☀️" is-link bindtap="onWake" />
     </van-cell-group>
     
     <van-cell-group inset>

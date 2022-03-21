@@ -17,6 +17,12 @@ Page({
     })
   },
 
+  onWake: function(event){
+    wx.navigateTo({
+      url: '../wake/wake',
+    })
+  },
+
   onEatting: function(event){
     let type = Number(event["currentTarget"]["dataset"]["type"]);
     wx.navigateTo({

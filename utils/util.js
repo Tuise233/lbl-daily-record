@@ -1,10 +1,15 @@
 
 export const userData = {
-  "version": "1.4",
+  "version": "1.5",
   "score": 0,
   "name": "hcx",
   "date": formatTime(new Date()),
   "sleep": {
+    "count": 0,
+    "state": false,
+    "list": []
+  },
+  "wake": {
     "count": 0,
     "state": false,
     "list": []

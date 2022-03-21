@@ -7,7 +7,8 @@
         "pages/main/main",
         "pages/store/store_main/store",
         "pages/store/store_history/store",
-        "pages/store/store_report/store"
+        "pages/store/store_report/store",
+        "pages/wake/wake"
     ],
     "window": {
         "backgroundTextStyle": "light",

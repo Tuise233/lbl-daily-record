@@ -66,6 +66,7 @@ Page({
                 "text": this.data.leaveMsg
             });
             sendTips("女朋友打卡提醒", `火车侠打卡啦  \n事件: 睡眠打卡  \n当前积分: ${current.globalData.userData["score"]}分  \n今日心情: ${this.data.motionList[Number(this.data.radio)]}  \n执行力评分: ${this.data.rateValue1}分  \n专注力评分: ${this.data.rateValue2}分  \n留言: ${this.data.leaveMsg}`);
+            updateData(current.globalData.userData);
             Notify({
                 type: "success",
                 message: "成功打卡啦! 积分+1",
@@ -77,7 +78,6 @@ Page({
                     })
                 }
             })
-            updateData(current.globalData.userData);
         }
     },
 

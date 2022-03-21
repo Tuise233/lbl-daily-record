@@ -10,16 +10,16 @@ exports.main = async (event, context) => {
     let success = "success";
     let reason = "";
     let data = event["data"];
-    console.log(data);
     try{
         return await collection.where({
-            _openid: data["_openid"]
+            _openid: event["openId"]
         }).update({
             data: {
                 version: data["version"],
                 score: data["score"],
                 date: data["date"],
                 sleep: data["sleep"],
+                wake: data["wake"],
                 eatting: data["eatting"],
                 selfpic: data["selfpic"],
                 giftlist: data["giftlist"]

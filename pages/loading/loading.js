@@ -90,6 +90,7 @@ Page({
 
           //判断数据版本更新
           if(data["version"] != userData["version"]){
+            /*
             let newData = userData;
             newData["score"] = data["score"];
             newData["name"] = data["name"];
@@ -98,10 +99,12 @@ Page({
             newData["eatting"] = data["eatting"];
             newData["selfpic"] = data["selfpic"];
             data = newData;
+            */
+            data["version"] = userData["version"];
           }
           
           current.globalData.userData = data;
-          
+          console.log(data);
           updateData(data);
           setTimeout(() => {
             wx.redirectTo({

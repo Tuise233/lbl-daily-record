@@ -1,0 +1,23 @@
+<view class="container">
+    <view class="titleContainer">
+        <text style="font-weight: 900; font-size: 40rpx;">早起打卡</text>
+        <text style="margin-top: 20rpx; color: gray; font-size: 30rpx;">早上好~ 早起的火车侠活力满满!!</text>
+    </view>
+
+    <view class="mainContainer">
+        <van-cell-group inset>
+            <van-cell title="早起评价" label="给今天的自己定个小目标~" />
+            <van-cell title="执行力">
+                <van-rate id="rateValue1" value="{{rateValue1}}" size="{{25}}" color="#FFD700" void-icon="star" void-color="#eee"bind:change="onRateChange" />
+            </van-cell>
+            <van-cell title="专注力">
+                <van-rate id="rateValue2" value="{{rateValue2}}" size="{{25}}" color="#FFD700" void-icon="star" void-color="#eee"bind:change="onRateChange" />
+            </van-cell>
+        </van-cell-group>
+
+        <van-cell-group inset>
+            <van-button type="info" size="large" bindtap="recordWake">打卡起床</van-button>
+        </van-cell-group>
+    </view>
+</view>
+<van-notify id="van-notify" />
