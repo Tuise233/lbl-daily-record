@@ -101,17 +101,21 @@ Page({
 
       //判断该餐是否记录
       for(let i = 0; i < array.length; i++){
-        if(array[i][this.data.type]["state"] == true){
-          Notify({
-            type: "warning",
-            message: "笨蛋 这餐已经记录过啦",
-            top: 0,
-            safeAreaInsetTop: true
-          })
-          recorded = true;
-          return;
-        } else {
-          index = i;
+        let date1 = array[i][0]["date"];
+        let date2 = formatTime(new Date());
+        if(date1.split('/')[0] == date2.split('/')[0] && date1.split('/')[1] == date2.split('/')[1] && date1.split('/')[2].split(' ')[0] == date2.split('/')[2].split(' ')[0]){
+          if(array[i][this.data.type]["state"] == true){
+            Notify({
+              type: "warning",
+              message: "笨蛋 这餐已经记录过啦",
+              top: 0,
+              safeAreaInsetTop: true
+            })
+            recorded = true;
+            return;
+          } else {
+            index = i;
+          }
         }
       }
 
