@@ -82,6 +82,7 @@ Page({
               });
             }
             data["eatting"]["list"].push(newArray);
+            data["wake"]["state"] = false;
           }
           this.setData({
             canIUseGetUserProfile: true,

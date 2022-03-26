@@ -1,6 +1,5 @@
 {
   "usingComponents": {
-    "van-loading": "@vant/weapp/loading/index",
-    "van-notify": "@vant/weapp/notify/index"
+    
   }
 }

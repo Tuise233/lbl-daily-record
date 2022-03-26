@@ -1,0 +1,29 @@
+<view class="container">
+    <van-tabs style="width: 100%;" animated color="#aaabc1" type="card">
+        <van-tab title-style="font-weight: 900;" title="睡眠打卡">
+            <van-tabs style="width: 100%; position: relative; top: 30rpx;" animated color="#aaabc1" type="card" sticky>
+                <van-tab title-style="font-weight: 900;" title="早睡打卡">
+                    <view class="mainContainer" style="margin-top: 50rpx;">
+                        <van-calendar title="本月打卡" class="calendar" poppable="{{false}}" show-confirm="{{false}}" min-date="{{minDate}}" max-date="{{maxDate}}" type="multiple" default-date="{{sleepDate}}" color="#aaabc1" bind:select="onSelect" readonly/>
+                    </view>
+                </van-tab>
+
+                <van-tab title-style="font-weight: 900;" title="早起打卡">
+                    <view class="mainContainer" style="margin-top: 50rpx;">
+                        <van-calendar title="本月打卡" class="calendar" poppable="{{false}}" show-confirm="{{false}}" min-date="{{minDate}}" max-date="{{maxDate}}" type="multiple" default-date="{{wakeDate}}" color="#aaabc1" bind:select="onSelect" readonly/>
+                    </view>
+                </van-tab>
+            </van-tabs>
+        </van-tab>
+        
+        <van-tab title-style="font-weight: 900;" title="三餐打卡">
+            三餐打卡
+        </van-tab>
+
+        <van-tab title-style="font-weight: 900;" title="其他打卡">
+            其他打卡
+        </van-tab>
+    </van-tabs>
+    
+</view>
+<van-notify id="van-notify" />

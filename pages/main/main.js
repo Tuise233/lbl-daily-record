@@ -11,6 +11,12 @@ Page({
     score: 0
   },
 
+  onHistory: function(type){
+    wx.navigateTo({
+      url: '../history/history',
+    })
+  },
+
   onSleep: function(event){
     wx.navigateTo({
       url: '../sleep/sleep'
